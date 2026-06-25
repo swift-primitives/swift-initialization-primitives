@@ -1,0 +1,8 @@
+description: "The Initiable capability — a top-level protocol for empty construction, shared by growable disciplines (Set, Array, Dictionary) in Swift."
+topics:
+  - primitives
+  - initialization
+  - protocol
+homepage: "https://swift-institute.org"
+readme:
+  family: E

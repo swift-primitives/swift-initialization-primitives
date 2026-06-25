@@ -12,10 +12,40 @@ let package = Package(
         .visionOS(.v26),
     ],
     products: [
+        // MARK: - Namespace
+        .library(
+            name: "Initialization Primitive",
+            targets: ["Initialization Primitive"]
+        ),
+
+        // MARK: - Protocol
+        .library(
+            name: "Initialization Protocol",
+            targets: ["Initialization Protocol"]
+        ),
+
+        // MARK: - Witness
+        .library(
+            name: "Initialization Witness Primitives",
+            targets: ["Initialization Witness Primitives"]
+        ),
+
         // MARK: - Attachable
+        .library(
+            name: "Initiable",
+            targets: ["Initiable"]
+        ),
+
+        // MARK: - Umbrella
         .library(
             name: "Initialization Primitives",
             targets: ["Initialization Primitives"]
+        ),
+
+        // MARK: - Standard Library Integration
+        .library(
+            name: "Initialization Primitives Standard Library Integration",
+            targets: ["Initialization Primitives Standard Library Integration"]
         ),
 
         // MARK: - Test Support
@@ -27,10 +57,53 @@ let package = Package(
     dependencies: [
     ],
     targets: [
+        // MARK: - Namespace
+        .target(
+            name: "Initialization Primitive",
+            dependencies: []
+        ),
+
+        // MARK: - Protocol
+        .target(
+            name: "Initialization Protocol",
+            dependencies: [
+                "Initialization Primitive",
+            ]
+        ),
+
+        // MARK: - Witness
+        .target(
+            name: "Initialization Witness Primitives",
+            dependencies: [
+                "Initialization Protocol",
+            ]
+        ),
+
         // MARK: - Attachable
         .target(
+            name: "Initiable",
+            dependencies: [
+                "Initialization Witness Primitives",
+            ]
+        ),
+
+        // MARK: - Umbrella
+        .target(
             name: "Initialization Primitives",
-            dependencies: []
+            dependencies: [
+                "Initialization Primitive",
+                "Initialization Protocol",
+                "Initialization Witness Primitives",
+                "Initiable",
+            ]
+        ),
+
+        // MARK: - Standard Library Integration
+        .target(
+            name: "Initialization Primitives Standard Library Integration",
+            dependencies: [
+                "Initiable",
+            ]
         ),
 
         // MARK: - Test Support
@@ -47,6 +120,7 @@ let package = Package(
             name: "Initialization Primitives Tests",
             dependencies: [
                 "Initialization Primitives",
+                "Initialization Primitives Standard Library Integration",
                 "Initialization Primitives Test Support",
             ]
         ),

@@ -1,3 +1,14 @@
+// ===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-primitives open source project
+//
+// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+//
+// ===----------------------------------------------------------------------===//
+
 public import Initialization_Primitives
 
 extension Fixture {
@@ -7,8 +18,10 @@ extension Fixture {
     /// (non-shared) mutation primitive, which is deliberately *not* part of
     /// `Initiable`.
     public struct Bag: Initiable, Equatable {
+        /// The collected elements — empty in a freshly-constructed `Bag`.
         public var elements: [Int]
 
+        /// Constructs the empty `Bag` (no elements).
         public init() {
             self.elements = []
         }

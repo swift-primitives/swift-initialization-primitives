@@ -1,3 +1,14 @@
+// ===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-primitives open source project
+//
+// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+//
+// ===----------------------------------------------------------------------===//
+
 import Initialization_Primitives_Test_Support
 import Testing
 
@@ -32,13 +43,13 @@ extension `Initiable Tests`.`Edge Case` {
 
     @Test
     func `move-only conformer constructs its empty value via init`() {
-        let value = Fixture.MoveOnly()
+        let value = Fixture.Unique()
         #expect(value.count == 0)
     }
 
     @Test
-    func `generic factory constructs a move-only Initiable through the suppression`() {
-        let value: Fixture.MoveOnly = Fixture.makeMoveOnly()
+    func `the generic factory constructs a move-only Initiable through the suppression`() {
+        let value: Fixture.Unique = Fixture.make()
         #expect(value.count == 0)
     }
 }
@@ -63,7 +74,7 @@ extension `Initiable Tests`.Performance {
 
     @Test
     func `repeated empty construction stays correct under load`() {
-        for _ in 0 ..< 1_000 {
+        for _ in 0..<1_000 {
             let value = Fixture.Empty()
             #expect(value.count == 0)
         }

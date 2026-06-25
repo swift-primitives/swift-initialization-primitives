@@ -12,15 +12,13 @@
 public import Initialization_Primitives
 
 extension Fixture {
-    /// The canonical `Initiable` shape for a Copyable value type: starts in its
-    /// empty state (`count == 0`).
-    public struct Empty: Initiable, Equatable {
-        /// Element count — `0` in the empty state a fresh value starts from.
-        public var count: Int
+    /// A hand-written ``Initializing`` (active-producer) conformer: a stateless factory
+    /// that produces `0` on each `make()`. Proves the active protocol is satisfiable by
+    /// a nominal type (not only by the closure-backed ``Initialization/Witness``) and
+    /// that `make()` is reusable through a borrow.
+    public struct Zero: Initializing {
+        public init() {}
 
-        /// Constructs the empty value (`count == 0`).
-        public init() {
-            self.count = 0
-        }
+        public func make() -> Int { 0 }
     }
 }

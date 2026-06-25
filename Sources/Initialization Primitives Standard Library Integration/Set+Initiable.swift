@@ -9,5 +9,14 @@
 //
 // ===----------------------------------------------------------------------===//
 
-@_exported public import Initialization_Primitives
-@_exported public import Testing
+//
+//  Set+Initiable.swift
+//  swift-initialization-primitives
+//
+
+public import Initiable
+
+/// `Set` begins in its canonical empty state via the standard library's parameterless
+/// `init()` — the archetypal growable discipline. Infallible, so `Failure` infers to
+/// `Never`.
+extension Set: Initiable {}

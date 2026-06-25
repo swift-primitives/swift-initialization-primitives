@@ -9,5 +9,16 @@
 //
 // ===----------------------------------------------------------------------===//
 
-@_exported public import Initialization_Primitives
-@_exported public import Testing
+//
+//  Array+Initiable.swift
+//  swift-initialization-primitives
+//
+//  Standard-library integration: Array is a growable discipline that begins empty.
+//
+
+public import Initiable
+
+/// `Array` begins in its canonical empty state via the standard library's
+/// parameterless `init()`. The conformance is infallible, so `Failure` infers to
+/// `Never` and no call site needs `try`.
+extension Array: Initiable {}

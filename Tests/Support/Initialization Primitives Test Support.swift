@@ -1,3 +1,14 @@
+// ===----------------------------------------------------------------------===//
+//
+// This source file is part of the swift-primitives open source project
+//
+// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
+// Licensed under Apache License v2.0
+//
+// See LICENSE for license information
+//
+// ===----------------------------------------------------------------------===//
+
 //
 //  Initialization Primitives Test Support.swift
 //  swift-initialization-primitives
@@ -8,7 +19,7 @@
 public import Initialization_Primitives
 
 /// Namespace for test fixtures — concrete `Initiable` conformers and the
-/// generic empty-construction helpers shared by the test target.
+/// generic empty-construction helper shared by the test target.
 ///
 /// Fixtures live in Test Support (per [TEST-010] / [TEST-019]) so the test
 /// target consumes them through a single `import
@@ -17,21 +28,20 @@ public import Initialization_Primitives
 public enum Fixture {}
 
 extension Fixture {
-    /// Generic empty-construction over any `Initiable` conformer.
+    /// Generic empty-construction over any `Initiable` conformer, copyable or
+    /// move-only.
     ///
-    /// Exercises that `Initiable.init()` is callable through a generic
-    /// constraint — the payoff of the shared capability: code that builds a
-    /// fresh empty value without knowing the concrete type.
-    public static func make<T: Initiable>() -> T {
-        T()
-    }
-
-    /// Generic empty-construction admitting `~Copyable` conformers.
+    /// The `~Copyable` constraint is a suppression, not a requirement: it admits
+    /// both copyable conformers (which trivially satisfy it) and move-only ones.
+    /// A single factory therefore covers both copyability quadrants and
+    /// exercises the payoff of the shared capability — building a fresh empty
+    /// value from the type alone, with no knowledge of the concrete type or its
+    /// copyability.
     ///
-    /// Confirms the protocol's `~Copyable` suppression flows through a generic
-    /// call site: a move-only growable discipline can still be constructed
-    /// empty generically.
-    public static func makeMoveOnly<T: Initiable & ~Copyable>() -> T {
-        T()
+    /// `throws(T.Failure)` threads the conformer's typed error channel through: an
+    /// infallible conformer (`Failure == Never`) makes this call site need no `try`,
+    /// while a fallible one propagates its precise error type.
+    public static func make<T: Initiable & ~Copyable>() throws(T.Failure) -> T {
+        try T()
     }
 }

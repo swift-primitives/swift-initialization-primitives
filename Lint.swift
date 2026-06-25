@@ -1,3 +1,4 @@
+// swift-linter-tools-version: 0.1
 // ===----------------------------------------------------------------------===//
 //
 // This source file is part of the swift-primitives open source project
@@ -9,5 +10,14 @@
 //
 // ===----------------------------------------------------------------------===//
 
-@_exported public import Initialization_Primitives
-@_exported public import Testing
+import Linter
+import Linter_Primitives_Rules
+
+Lint.run(dependencies: [
+    .package(
+        path: "../swift-primitives-linter-rules",
+        products: ["Linter Primitives Rules"]
+    ),
+]) {
+    Lint.Rule.Bundle.primitives
+}

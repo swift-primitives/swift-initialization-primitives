@@ -9,5 +9,13 @@
 //
 // ===----------------------------------------------------------------------===//
 
-@_exported public import Initialization_Primitives
-@_exported public import Testing
+//
+//  Substring+Initiable.swift
+//  swift-initialization-primitives
+//
+
+public import Initiable
+
+/// `Substring` begins in its canonical empty state (`""`) via the standard library's
+/// parameterless `init()`. Infallible, so `Failure` infers to `Never`.
+extension Substring: Initiable {}

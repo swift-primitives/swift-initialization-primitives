@@ -9,5 +9,5 @@
 //
 // ===----------------------------------------------------------------------===//
 
-@_exported public import Initialization_Primitives
-@_exported public import Testing
+@_exported public import Initialization_Primitive
+@_exported public import Initialization_Protocol

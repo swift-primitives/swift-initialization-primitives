@@ -12,9 +12,10 @@
 public import Initialization_Primitives
 
 extension Fixture {
-    /// The canonical `Initiable` shape for a Copyable value type: starts in its
-    /// empty state (`count == 0`).
-    public struct Empty: Initiable, Equatable {
+    /// A move-only (`~Copyable`) `Initiable` conformer. Its existence proves the
+    /// protocol's `~Copyable` suppression admits non-copyable growable
+    /// disciplines — a `Copyable`-requiring `Initiable` would reject this type.
+    public struct Unique: ~Copyable, Initiable {
         /// Element count — `0` in the empty state a fresh value starts from.
         public var count: Int
 
