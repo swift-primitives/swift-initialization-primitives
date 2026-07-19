@@ -47,7 +47,9 @@ extension Initialization {
         /// The type of value this initializer produces.
         associatedtype Element: ~Copyable
 
-        /// The error type. Defaults to `Never` for infallible initializers.
+        /// The error type.
+        ///
+        /// Defaults to `Never` for infallible initializers.
         associatedtype Failure: Swift.Error = Never
 
         /// Produce a value.

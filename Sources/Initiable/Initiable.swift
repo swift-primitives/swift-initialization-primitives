@@ -79,8 +79,10 @@
 /// }
 /// ```
 public protocol Initiable: ~Copyable {
-    /// The error type. Defaults to `Never` for infallible empty construction, so a
-    /// conformer with a non-throwing `init()` pays no ceremony and no call site needs
+    /// The error type.
+    ///
+    /// Defaults to `Never` for infallible empty construction, so a conformer
+    /// with a non-throwing `init()` pays no ceremony and no call site needs
     /// `try`.
     associatedtype Failure: Swift.Error = Never
 
